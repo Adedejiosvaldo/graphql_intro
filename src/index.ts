@@ -14,6 +14,15 @@ const resolvers = {
     authors() {
       return authors;
     },
+    review(_: any, args: any) {
+      return reviews.find((review) => review.id === args.id);
+    },
+    author(_: any, args: any) {
+      return authors.find((author) => author.id === args.id);
+    },
+    game(_: any, args: any) {
+      return games.find((game) => game.id === args.id);
+    },
   },
 };
 
