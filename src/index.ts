@@ -55,8 +55,19 @@ const resolvers = {
         id: Math.floor(Math.random() * 1000).toString(),
       };
 
-      const gamesNew = games.push(game);
+      games.push(game);
       return game;
+    },
+    updateGame(_: any, arg: any) {
+      const game = games.map((g) => {
+        if (g.id === arg.id) {
+          return { ...g, ...arg.edits };
+        }
+        return g;
+      });
+      console.log(game);
+      return game.find((g) => g.id === arg.id);
+      //   return game;
     },
   },
 };
