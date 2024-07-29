@@ -24,6 +24,41 @@ const resolvers = {
       return games.find((game) => game.id === args.id);
     },
   },
+
+  Game: {
+    reviews(parent: any) {
+      return reviews.filter((r) => r.game_id === parent.id);
+    },
+  },
+  Author: {
+    reviews(parent: any) {
+      return reviews.filter((r) => r.author_id === parent.id);
+    },
+  },
+  //   Review: {
+  //     author(parent: any) {
+  //       return reviews.find((author) => parent.id === author.author_id);
+  //     },
+  //     reviews(parent: any) {
+  //       return games.find((g) => parent.game_id === g.id);
+  //     },
+  //   },
+
+  Mutation: {
+    deleteGame(_: any, args: any) {
+      const game: any = games.filter((e) => e.id !== args.id);
+      return game;
+    },
+    addGame(_: any, arg: any) {
+      let game = {
+        ...arg.game,
+        id: Math.floor(Math.random() * 1000).toString(),
+      };
+
+      const gamesNew = games.push(game);
+      return game;
+    },
+  },
 };
 
 //SCHEMA - describes the shape of the data that the server can send and receive
